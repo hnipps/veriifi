@@ -19,8 +19,7 @@ export const request = (
     returnFaceId: "false",
     returnFaceLandmarks: "false",
     returnRecognitionModel: "false",
-    returnFaceAttributes:
-      "accessories,blur,exposure,glasses,headPose,noise,occlusion",
+    returnFaceAttributes: "accessories,blur,exposure,glasses,noise,occlusion",
     detectionModel: "detection_01",
     recognitionModel: "recognition_02"
   };
@@ -49,14 +48,14 @@ export const request = (
  * Given an array of detected faces, we simplify this into a series of yes/no requirements.
  * These requirements can then be used to render feedback and tips in a component.
  * Actual uploading of a photo would also be disabled unless all these requirements are met.
- * @param {Object[]} response - A `{json, photoDimenions }` object, where `json` is an array of "faces" that the API found.
+ * @param {Object} response - A `{json, photoDimenions }` object, where `json` is an array of "faces" that the API found.
  * @returns {Object} An object containing flags/requirements about the face to validate.
  */
-export const transform = (response: any) => {
+export const transform = (response: {
+  json: any;
+  photoDimensions: { height: number; width: number };
+}) => {
   const { json, photoDimensions } = response;
-
-  // Don't accept a face tilted more than this up/down/left/right
-  const MAX_TILT_DEGREES = 30;
 
   // Detected face must be at least 50% as wide (and tall) as the photo
   // This threshold is not very robust at all!
@@ -91,8 +90,7 @@ export const transform = (response: any) => {
         exposure: { exposureLevel },
         glasses,
         occlusion,
-        accessories,
-        headPose
+        accessories
       }
     } = json[0];
 
@@ -101,10 +99,7 @@ export const transform = (response: any) => {
     const visibleChecks = [
       glasses === "NoGlasses",
       Object.values(occlusion).every(v => v === false),
-      accessories.length === 0,
-      Object.values<any>(headPose).every(
-        v => v >= -MAX_TILT_DEGREES && v <= MAX_TILT_DEGREES
-      )
+      accessories.length === 0
     ];
 
     requirements.isInFocus =

@@ -3,8 +3,6 @@ import PropTypes, { number } from "prop-types";
 
 import ReactDropzone from "react-dropzone";
 
-import "./PhotoUploader.css";
-
 const PhotoUploader = ({
   updateUploadedPhoto,
   children

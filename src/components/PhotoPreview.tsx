@@ -1,15 +1,41 @@
 import React from "react";
+
+import RequirementList, { Requirement } from "./RequirementListItem";
+
 import "./PhotoPreview.css";
+
+interface PhotoPreviewProps extends React.HTMLAttributes<HTMLElement> {
+  preview?: string;
+  requirements?: Requirement[];
+}
 
 const PhotoPreview = ({
   preview,
-  onClick
-}: {
-  preview?: string;
-  onClick?: () => void;
-}) => {
+  requirements,
+  className,
+  ...props
+}: PhotoPreviewProps) => {
   const style = preview ? { backgroundImage: `url(${preview})` } : {};
-  return <div className="preview" style={style} onClick={onClick} />;
+  return (
+    <div
+      className={className + " preview cover bg-center h5 w5"}
+      style={style}
+      {...props}
+    >
+      {requirements && (
+        <aside className="photo-preview__requirements ml3 w5">
+          <h2>Requirements</h2>
+          <ul>
+            {requirements.map(({ req, state }, i) => (
+              <RequirementList isSatisfied={state} key={`req-${i}`}>
+                {req}
+              </RequirementList>
+            ))}
+          </ul>
+        </aside>
+      )}
+    </div>
+  );
 };
 
 export default PhotoPreview;

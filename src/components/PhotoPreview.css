@@ -1,11 +1,9 @@
 .preview {
-  background-image: url('../assets/preview.png');
-  background-position: 50% 50%;
-  background-repeat: no-repeat;
-  background-size: contain;
-  height: 65vw;
-  margin: 0 auto 32px auto;
-  max-height: 325px;
-  max-width: 325px;
-  width: 65vw;
+  background-image: url("../assets/preview.png");
+  position: relative;
+}
+
+.photo-preview__requirements {
+  position: absolute;
+  left: 100%;
 }
