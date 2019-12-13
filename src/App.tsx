@@ -1,8 +1,9 @@
-import React, { useState } from "react";
+import React from "react";
 import { BrowserRouter as Router, Switch, Route } from "react-router-dom";
 
 import UploadId from "./pages/UploadId";
 import UploadPhoto from "./pages/UploadPhoto";
+import ThankYou from "./pages/ThankYou";
 
 import "./App.css";
 
@@ -15,7 +16,7 @@ const App: React.FC = () => {
             <UploadPhoto />
           </Route>
           <Route path="/done">
-            <div>DONE!</div>
+            <ThankYou />
           </Route>
           <Route path="/">
             <UploadId />
