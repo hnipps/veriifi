@@ -1,16 +1,11 @@
 import React, { useCallback, useState } from "react";
-import { BrowserRouter as Router } from "react-router-dom";
 
 import PhotoPreview from "../components/PhotoPreview";
 import PhotoUploader from "../components/PhotoUploader";
-import {
-  Requirement,
-  Requirement_State
-} from "../components/RequirementListItem";
+import { Requirement_State } from "../components/RequirementListItem";
 import Link from "../components/Link";
 
 const UploadId = () => {
-  const [idSubmitted, setIdSubmitted] = useState(false);
   const [photo, setPhoto] = useState({ preview: undefined });
 
   const requirementsId = [

@@ -1,5 +1,4 @@
 import React from "react";
-import PropTypes, { number } from "prop-types";
 
 import ReactDropzone from "react-dropzone";
 
@@ -55,10 +54,6 @@ const PhotoUploader = ({
       )}
     </ReactDropzone>
   );
-};
-
-PhotoUploader.propTypes = {
-  updateUploadedPhoto: PropTypes.func.isRequired
 };
 
 export default PhotoUploader;

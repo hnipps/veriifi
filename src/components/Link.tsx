@@ -17,7 +17,7 @@ const Link = ({
 }) => {
   return (
     <RouterLink
-      className={`link mw4 h2 flex justify-center items-center no-underline ${
+      className={`link mw4 h2 ph2 flex justify-center items-center no-underline ${
         disabled ? disabledClasses : regClasses
       }`}
       to={to}

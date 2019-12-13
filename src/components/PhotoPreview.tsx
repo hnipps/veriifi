@@ -18,7 +18,7 @@ const PhotoPreview = ({
   const style = preview ? { backgroundImage: `url(${preview})` } : {};
   return (
     <div
-      className={className + " preview bg-center h5 w5"}
+      className={className + " preview bg-center h5 w5 ba br2 bw0"}
       style={style}
       {...props}
     >

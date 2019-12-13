@@ -1,10 +1,7 @@
 import React, { useCallback, useState, useMemo } from "react";
 import PhotoPreview from "../components/PhotoPreview";
 import PhotoUploader from "../components/PhotoUploader";
-import {
-  Requirement,
-  Requirement_State
-} from "../components/RequirementListItem";
+import { Requirement_State } from "../components/RequirementListItem";
 import Link from "../components/Link";
 import msFaceAPI from "../services/ms-face-api";
 
@@ -50,7 +47,7 @@ const UploadPhoto = () => {
         console.log(newResult);
       });
     },
-    [msFaceAPI, setPhoto]
+    [setPhoto, updateRequirements]
   );
 
   console.log(photo);
@@ -73,8 +70,6 @@ const UploadPhoto = () => {
           Submit
         </Link>
       </div>
-      <p>{JSON.stringify(result)}</p>
-      <p>{JSON.stringify(requirementsPhoto)}</p>
     </>
   );
 };
