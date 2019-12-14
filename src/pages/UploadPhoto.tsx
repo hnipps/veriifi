@@ -1,9 +1,12 @@
 import React, { useCallback, useState, useMemo } from "react";
+import { Link } from "react-router-dom";
+
 import PhotoPreview from "../components/PhotoPreview";
 import PhotoUploader from "../components/PhotoUploader";
 import { Requirement_State } from "../components/RequirementListItem";
-import Link from "../components/Link";
 import msFaceAPI from "../services/ms-face-api";
+import Heading from "../components/Heading";
+import Button from "../components/Button";
 
 const UploadPhoto = () => {
   const [photo, setPhoto] = useState({ preview: undefined });
@@ -54,21 +57,23 @@ const UploadPhoto = () => {
 
   return (
     <>
-      <h1 className="tc">Upload a photo of yourself</h1>
+      <Heading element="h1" className="tc">
+        Upload a photo of yourself
+      </Heading>
       <PhotoPreview
         className="center cover"
         preview={photo.preview}
         requirements={requirementsPhoto}
       />
       <div className="center w5 flex justify-betwen mt1">
-        <button className="photo-uploader__button">
+        <Button element="button" className="mr1" variant="secondary">
           <PhotoUploader updateUploadedPhoto={updateUploadedPhoto}>
             Choose a photo
           </PhotoUploader>
-        </button>
-        <Link to="/done" disabled={!Boolean(photo.preview)}>
+        </Button>
+        <Button element={Link} to="/done" disabled={!Boolean(photo.preview)}>
           Submit
-        </Link>
+        </Button>
       </div>
     </>
   );

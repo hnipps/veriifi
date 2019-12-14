@@ -1,16 +1,23 @@
 import React from "react";
-import Link from "../components/Link";
+import { Link } from "react-router-dom";
+
+import Heading from "../components/Heading";
+import Button from "../components/Button";
 
 const Introduction = () => (
   <>
-    <h1 className="tc">Welcome!</h1>
+    <Heading element="h1" className="tc">
+      Welcome!
+    </Heading>
     <p>To open your account we need to verify your identity.</p>
     <p>You'll need the following:</p>
     <ul>
       <li>Government-issued ID</li>
       <li>A clear photo of yourself</li>
     </ul>
-    <Link to="/id">Continue</Link>
+    <Button element={Link} to="/id" className="center">
+      Continue
+    </Button>
   </>
 );
 

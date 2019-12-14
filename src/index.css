@@ -1,1 +1,13 @@
 @import "../node_modules/tachyons/css/tachyons.min.css";
+
+.cursor-default {
+  cursor: default;
+}
+
+.no-pointer-events {
+  pointer-events: none;
+}
+
+.initial-pointer-events {
+  pointer-events: initial;
+}

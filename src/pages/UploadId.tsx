@@ -1,9 +1,11 @@
 import React, { useCallback, useState } from "react";
+import { Link } from "react-router-dom";
 
 import PhotoPreview from "../components/PhotoPreview";
 import PhotoUploader from "../components/PhotoUploader";
 import { Requirement_State } from "../components/RequirementListItem";
-import Link from "../components/Link";
+import Heading from "../components/Heading";
+import Button from "../components/Button";
 
 const UploadId = () => {
   const [photo, setPhoto] = useState({ preview: undefined });
@@ -22,21 +24,23 @@ const UploadId = () => {
 
   return (
     <>
-      <h1 className="tc">Upload your photo ID</h1>
+      <Heading element="h1" className="tc">
+        Upload your photo ID
+      </Heading>
       <PhotoPreview
         className="center contain"
         preview={photo.preview}
         requirements={requirementsId}
       />
       <div className="center w5 flex justify-betwen mt1">
-        <button className="photo-uploader__button">
+        <Button element="button" className="mr1" variant="secondary">
           <PhotoUploader updateUploadedPhoto={updateUploadedId}>
             Choose a photo
           </PhotoUploader>
-        </button>
-        <Link to="/photo" disabled={!Boolean(photo.preview)}>
+        </Button>
+        <Button element={Link} to="/photo" disabled={!Boolean(photo.preview)}>
           Submit
-        </Link>
+        </Button>
       </div>
     </>
   );

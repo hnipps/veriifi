@@ -47,7 +47,7 @@ const PhotoUploader = ({
       noDrag
     >
       {({ getRootProps, getInputProps }) => (
-        <div className="photo-uploader" {...getRootProps()}>
+        <div className="photo-uploader outline-0" {...getRootProps()}>
           <input {...getInputProps()} />
           <span>{children}</span>
         </div>
