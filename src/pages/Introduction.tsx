@@ -10,8 +10,8 @@ const Introduction = () => (
       Welcome!
     </Heading>
     <p>To open your account we need to verify your identity.</p>
-    <p>You'll need the following:</p>
-    <ul>
+    <p className="mb2">You'll need the following:</p>
+    <ul className="ma0">
       <li>Government-issued ID</li>
       <li>A clear photo of yourself</li>
     </ul>

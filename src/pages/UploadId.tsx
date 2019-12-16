@@ -3,15 +3,21 @@ import { Link } from "react-router-dom";
 
 import PhotoPreview from "../components/PhotoPreview";
 import PhotoUploader from "../components/PhotoUploader";
-import { Requirement_State } from "../components/RequirementListItem";
+import {
+  Requirement_State,
+  Requirement
+} from "../components/RequirementListItem";
 import Heading from "../components/Heading";
 import Button from "../components/Button";
 
 const UploadId = () => {
   const [photo, setPhoto] = useState({ preview: undefined });
 
-  const requirementsId = [
-    { req: "Government-issued ID", state: Requirement_State.UNCHECKED },
+  const requirementsId: Requirement[] = [
+    {
+      req: "Government-issued ID",
+      state: Requirement_State.UNCHECKED
+    },
     { req: "In focus", state: Requirement_State.UNCHECKED }
   ];
 
@@ -24,7 +30,7 @@ const UploadId = () => {
 
   return (
     <>
-      <Heading element="h1" className="tc">
+      <Heading element="h1" className="tc mb3">
         Upload your photo ID
       </Heading>
       <PhotoPreview

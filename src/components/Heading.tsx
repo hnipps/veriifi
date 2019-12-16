@@ -5,7 +5,7 @@ interface HeadingProps extends React.HTMLAttributes<HTMLHeadingElement> {
 }
 
 const Heading = ({ element: Element, className, ...props }: HeadingProps) => (
-  <Element className={`${className} tracked-tight`} {...props}></Element>
+  <Element className={`${className} tracked-tight ma0`} {...props}></Element>
 );
 
 export default Heading;

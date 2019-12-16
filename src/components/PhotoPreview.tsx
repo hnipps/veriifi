@@ -1,6 +1,6 @@
 import React from "react";
 
-import RequirementList, { Requirement } from "./RequirementListItem";
+import RequirementListItem, { Requirement } from "./RequirementListItem";
 import Heading from "../components/Heading";
 
 import "./PhotoPreview.css";
@@ -25,12 +25,12 @@ const PhotoPreview = ({
     >
       {requirements && (
         <aside className="photo-preview__requirements ml3 w5">
-          <Heading element="h2">Requirements</Heading>
-          <ul>
+          <Heading element="h2" className="mb2 mt3">Requirements</Heading>
+          <ul className="list pl2 ma0">
             {requirements.map(({ req, state }, i) => (
-              <RequirementList isSatisfied={state} key={`req-${i}`}>
+              <RequirementListItem isSatisfied={state} key={`req-${i}`}>
                 {req}
-              </RequirementList>
+              </RequirementListItem>
             ))}
           </ul>
         </aside>

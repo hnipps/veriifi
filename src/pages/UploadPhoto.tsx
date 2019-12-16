@@ -3,7 +3,10 @@ import { Link } from "react-router-dom";
 
 import PhotoPreview from "../components/PhotoPreview";
 import PhotoUploader from "../components/PhotoUploader";
-import { Requirement_State } from "../components/RequirementListItem";
+import {
+  Requirement_State,
+  Requirement
+} from "../components/RequirementListItem";
 import msFaceAPI from "../services/ms-face-api";
 import Heading from "../components/Heading";
 import Button from "../components/Button";
@@ -19,8 +22,11 @@ const UploadPhoto = () => {
     Requirement_State.UNCHECKED
   );
 
-  const requirementsPhoto = [
-    { req: "One face in the photo", state: requirementFaceState },
+  const requirementsPhoto: Requirement[] = [
+    {
+      req: "One face in the photo",
+      state: requirementFaceState
+    },
     { req: "In focus", state: requirementFocusState }
   ];
 
@@ -57,7 +63,7 @@ const UploadPhoto = () => {
 
   return (
     <>
-      <Heading element="h1" className="tc">
+      <Heading element="h1" className="tc mb3">
         Upload a photo of yourself
       </Heading>
       <PhotoPreview
