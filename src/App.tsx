@@ -5,13 +5,15 @@ import UploadId from "./pages/UploadId";
 import UploadPhoto from "./pages/UploadPhoto";
 import ThankYou from "./pages/ThankYou";
 import Introduction from "./pages/Introduction";
+import Header from "./components/Header";
 
 import "./App.css";
 
 const App: React.FC = () => {
   return (
-    <main className="mt4 mw7 center">
-      <Router>
+    <Router>
+      <Header />
+      <main className="mt4 mw7 center">
         <Switch>
           <Route path="/photo">
             <UploadPhoto />
@@ -26,8 +28,8 @@ const App: React.FC = () => {
             <Introduction />
           </Route>
         </Switch>
-      </Router>
-    </main>
+      </main>
+    </Router>
   );
 };
 

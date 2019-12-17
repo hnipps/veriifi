@@ -1,7 +1,6 @@
 import React from "react";
 import { Link, LinkProps } from "react-router-dom";
 import { combineClasses } from "../utils/combineClasses";
-import { string } from "prop-types";
 
 export interface UniqueButtonProps
   extends React.HTMLAttributes<HTMLButtonElement> {
