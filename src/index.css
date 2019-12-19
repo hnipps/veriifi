@@ -11,3 +11,7 @@
 .initial-pointer-events {
   pointer-events: initial;
 }
+
+.top-50 {
+  top: 50%;
+}

@@ -46,7 +46,7 @@ const Button = ({
       className={combineClasses(
         className,
         variantClassMap[disabled ? "disabled" : variant],
-        "w-100 mw4 br2 bn dib f6 fw6 tc ph2 pv1 no-underline flex items-center justify-center cursor-default"
+        "w-100 mw5 br2 bn dib f6 fw6 tc ph2 pv2 no-underline flex items-center justify-center cursor-default"
       )}
       {...props}
     />

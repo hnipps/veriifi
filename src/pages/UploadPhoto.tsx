@@ -10,10 +10,16 @@ import {
 import msFaceAPI from "../services/ms-face-api";
 import Heading from "../components/Heading";
 import Button from "../components/Button";
+import Dialog from "../components/Dialog";
 
 const UploadPhoto = () => {
   const [photo, setPhoto] = useState({ preview: undefined });
-  const [result, setResult] = useState();
+  const [, setResult] = useState({
+    hasSingleFace: undefined,
+    isInFocus: undefined
+  });
+  const [photoMeetsRequirements, setPhotoMeetsRequirements] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
 
   const [requirementFaceState, setRequirementFaceState] = useState(
     Requirement_State.UNCHECKED
@@ -53,13 +59,29 @@ const UploadPhoto = () => {
       msFaceAPI(photo.blob, { width, height }).then((newResult: any) => {
         setResult(newResult);
         updateRequirements(newResult);
+        setPhotoMeetsRequirements(doesPhotoMeetRequirements(newResult));
         console.log(newResult);
       });
     },
     [setPhoto, updateRequirements]
   );
 
-  console.log(photo);
+  const doesPhotoMeetRequirements = (result: {
+    hasSingleFace: any;
+    isInFocus: any;
+  }) =>
+    Object.keys(result)
+      .reduce<any[]>(
+        (acc, key) => [...acc, result[key as keyof typeof result]],
+        []
+      )
+      .every(val => val);
+
+  const handleSubmitWithBadPhoto = () => {
+    setIsDialogOpen(true);
+  };
+
+  const handleCancel = () => setIsDialogOpen(false);
 
   return (
     <>
@@ -77,10 +99,39 @@ const UploadPhoto = () => {
             Choose a photo
           </PhotoUploader>
         </Button>
-        <Button element={Link} to="/done" disabled={!Boolean(photo.preview)}>
-          Submit
-        </Button>
+        {photoMeetsRequirements ? (
+          <Button element={Link} to="/done" disabled={!Boolean(photo.preview)}>
+            Submit
+          </Button>
+        ) : (
+          <Button
+            element="button"
+            onClick={handleSubmitWithBadPhoto}
+            disabled={!Boolean(photo.preview)}
+          >
+            Submit
+          </Button>
+        )}
       </div>
+      {isDialogOpen ? (
+        <Dialog>
+          <Heading element="h1" className="mb3">
+            Are you sure?
+          </Heading>
+          <p className="mt0 mb2">Your photo does not meet all the criteria.</p>
+          <p className="mt0">
+            We might not be able to verify your identity and open your account.
+          </p>
+          <div className="flex">
+            <Button element="button" onClick={handleCancel} className="mr1">
+              Cancel
+            </Button>
+            <Button element={Link} to="/done" variant="secondary">
+              I'll take my chances
+            </Button>
+          </div>
+        </Dialog>
+      ) : null}
     </>
   );
 };
