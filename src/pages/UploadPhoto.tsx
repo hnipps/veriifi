@@ -20,6 +20,7 @@ const UploadPhoto = () => {
   });
   const [photoMeetsRequirements, setPhotoMeetsRequirements] = useState(false);
   const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [checkingPhoto, setCheckingPhoto] = useState(false);
 
   const [requirementFaceState, setRequirementFaceState] = useState(
     Requirement_State.UNCHECKED
@@ -54,28 +55,30 @@ const UploadPhoto = () => {
 
   const updateUploadedPhoto = useCallback(
     (photo: any, dimensions: { height: number; width: number }) => {
+      const doesPhotoMeetRequirements = (result: {
+        hasSingleFace: any;
+        isInFocus: any;
+      }) =>
+        Object.keys(result)
+          .filter(key => key === "hasSingleFace" || key === "isInFocus")
+          .reduce<any[]>(
+            (acc, key) => [...acc, result[key as keyof typeof result]],
+            []
+          )
+          .every(val => val);
+
+      setCheckingPhoto(true);
       const { width, height } = dimensions;
       setPhoto(photo);
       msFaceAPI(photo.blob, { width, height }).then((newResult: any) => {
         setResult(newResult);
         updateRequirements(newResult);
         setPhotoMeetsRequirements(doesPhotoMeetRequirements(newResult));
-        console.log(newResult);
+        setCheckingPhoto(false);
       });
     },
-    [setPhoto, updateRequirements]
+    [setPhoto, updateRequirements, setPhotoMeetsRequirements]
   );
-
-  const doesPhotoMeetRequirements = (result: {
-    hasSingleFace: any;
-    isInFocus: any;
-  }) =>
-    Object.keys(result)
-      .reduce<any[]>(
-        (acc, key) => [...acc, result[key as keyof typeof result]],
-        []
-      )
-      .every(val => val);
 
   const handleSubmitWithBadPhoto = () => {
     setIsDialogOpen(true);
@@ -92,6 +95,7 @@ const UploadPhoto = () => {
         className="center cover"
         preview={photo.preview}
         requirements={requirementsPhoto}
+        loading={checkingPhoto}
       />
       <div className="center w5 flex justify-betwen mt1">
         <Button element="button" className="mr1" variant="secondary">
@@ -100,14 +104,18 @@ const UploadPhoto = () => {
           </PhotoUploader>
         </Button>
         {photoMeetsRequirements ? (
-          <Button element={Link} to="/done" disabled={!Boolean(photo.preview)}>
+          <Button
+            element={Link}
+            to="/done"
+            disabled={!Boolean(photo.preview && !checkingPhoto)}
+          >
             Submit
           </Button>
         ) : (
           <Button
             element="button"
             onClick={handleSubmitWithBadPhoto}
-            disabled={!Boolean(photo.preview)}
+            disabled={!Boolean(photo.preview && !checkingPhoto)}
           >
             Submit
           </Button>
