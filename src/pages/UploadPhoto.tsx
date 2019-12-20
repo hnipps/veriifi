@@ -3,7 +3,7 @@ import { Link } from "react-router-dom";
 
 import PhotoPreview from "../components/PhotoPreview";
 import PhotoUploader from "../components/PhotoUploader";
-import {
+import RequirementListItem, {
   Requirement_State,
   Requirement
 } from "../components/RequirementListItem";
@@ -91,35 +91,50 @@ const UploadPhoto = () => {
       <Heading element="h1" className="tc mb3">
         Upload a photo of yourself
       </Heading>
-      <PhotoPreview
-        className="center cover"
-        preview={photo.preview}
-        requirements={requirementsPhoto}
-        loading={checkingPhoto}
-      />
-      <div className="center w5 flex justify-betwen mt1">
-        <Button element="button" className="mr1" variant="secondary">
-          <PhotoUploader updateUploadedPhoto={updateUploadedPhoto}>
-            Choose a photo
-          </PhotoUploader>
-        </Button>
-        {photoMeetsRequirements ? (
-          <Button
-            element={Link}
-            to="/done"
-            disabled={!Boolean(photo.preview && !checkingPhoto)}
-          >
-            Submit
-          </Button>
-        ) : (
-          <Button
-            element="button"
-            onClick={handleSubmitWithBadPhoto}
-            disabled={!Boolean(photo.preview && !checkingPhoto)}
-          >
-            Submit
-          </Button>
-        )}
+      <div className="flex justify-center flex-column flex-row-ns">
+        <div className="dib v-top">
+          <PhotoPreview
+            className="center cover"
+            preview={photo.preview}
+            loading={checkingPhoto}
+          />
+          <div className="center w5 flex justify-betwen mt1">
+            <Button element="button" className="mr1" variant="secondary">
+              <PhotoUploader updateUploadedPhoto={updateUploadedPhoto}>
+                Choose a photo
+              </PhotoUploader>
+            </Button>
+            {photoMeetsRequirements ? (
+              <Button
+                element={Link}
+                to="/done"
+                disabled={!Boolean(photo.preview && !checkingPhoto)}
+              >
+                Submit
+              </Button>
+            ) : (
+              <Button
+                element="button"
+                onClick={handleSubmitWithBadPhoto}
+                disabled={!Boolean(photo.preview && !checkingPhoto)}
+              >
+                Submit
+              </Button>
+            )}
+          </div>
+        </div>
+        <aside className="dib v-top pl3 w5">
+          <Heading element="h2" className="mb2 mt3">
+            Requirements
+          </Heading>
+          <ul className="list pl2 ma0">
+            {requirementsPhoto.map(({ req, state }, i) => (
+              <RequirementListItem isSatisfied={state} key={`req-${i}`}>
+                {req}
+              </RequirementListItem>
+            ))}
+          </ul>
+        </aside>
       </div>
       {isDialogOpen ? (
         <Dialog>

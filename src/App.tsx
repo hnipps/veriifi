@@ -13,7 +13,7 @@ const App: React.FC = () => {
   return (
     <Router>
       <Header />
-      <main className="mt4 mw7 center relative">
+      <main className="pt4 ph3 mw7 center relative">
         <Switch>
           <Route path="/photo">
             <UploadPhoto />

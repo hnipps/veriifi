@@ -2,8 +2,3 @@
   background-image: url("../assets/preview.png");
   position: relative;
 }
-
-.photo-preview__requirements {
-  position: absolute;
-  left: 100%;
-}
