@@ -19,7 +19,7 @@ const UploadPhoto = () => {
     isInFocus: undefined
   });
   const [photoMeetsRequirements, setPhotoMeetsRequirements] = useState(false);
-  const [isDialogOpen, setIsDialogOpen] = useState(true);
+  const [isDialogOpen, setIsDialogOpen] = useState(false);
   const [checkingPhoto, setCheckingPhoto] = useState(false);
 
   const [requirementFaceState, setRequirementFaceState] = useState(
