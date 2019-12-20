@@ -19,7 +19,7 @@ const UploadPhoto = () => {
     isInFocus: undefined
   });
   const [photoMeetsRequirements, setPhotoMeetsRequirements] = useState(false);
-  const [isDialogOpen, setIsDialogOpen] = useState(false);
+  const [isDialogOpen, setIsDialogOpen] = useState(true);
   const [checkingPhoto, setCheckingPhoto] = useState(false);
 
   const [requirementFaceState, setRequirementFaceState] = useState(
@@ -131,10 +131,15 @@ const UploadPhoto = () => {
             We might not be able to verify your identity and open your account.
           </p>
           <div className="flex">
-            <Button element="button" onClick={handleCancel} className="mr1">
+            <Button
+              width="wide"
+              element="button"
+              onClick={handleCancel}
+              className="mr1"
+            >
               Cancel
             </Button>
-            <Button element={Link} to="/done" variant="secondary">
+            <Button width="wide" element={Link} to="/done" variant="secondary">
               I'll take my chances
             </Button>
           </div>

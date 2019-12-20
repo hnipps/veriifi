@@ -25,6 +25,7 @@ export type ButtonProps = (
   variant?: "primary" | "secondary";
   disabled?: boolean;
   className?: string;
+  width?: "wide" | "default";
 };
 
 const variantClassMap = {
@@ -33,10 +34,16 @@ const variantClassMap = {
   disabled: "bg-light-gray gray no-pointer-events"
 };
 
+const widthClassMap = {
+  wide: "mw5",
+  default: "mw4"
+};
+
 const Button = ({
   element: Element,
   variant = "primary",
   className,
+  width = "default",
   disabled = false,
   ...props
 }: ButtonProps) => {
@@ -46,7 +53,8 @@ const Button = ({
       className={combineClasses(
         className,
         variantClassMap[disabled ? "disabled" : variant],
-        "w-100 mw5 br2 bn dib f6 fw6 tc ph2 pv2 no-underline flex items-center justify-center cursor-default"
+        widthClassMap[width],
+        "w-100 br2 bn dib f6 fw6 tc ph2 pv2 no-underline flex items-center justify-center cursor-default"
       )}
       {...props}
     />

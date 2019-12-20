@@ -6,7 +6,7 @@ interface DialogProps {
 
 const Dialog = ({ children }: DialogProps) => {
   return (
-    <dialog className="mw6 flex flex-column justify-center top-50" open={true}>
+    <dialog className="absolute left-0 right-0 center bg-white pa3 ba bw2 mw6 flex flex-column justify-center top-50" open={true}>
       {children}
     </dialog>
   );
