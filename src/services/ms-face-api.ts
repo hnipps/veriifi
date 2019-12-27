@@ -12,7 +12,9 @@ export const request = (
   photoBlob: Blob,
   photoDimensions: { height: number; width: number }
 ) => {
-  const API_KEY = "82a9f2457404453a82958bc2c1801290";
+  const API_KEY = process.env.REACT_APP_MS_API_KEY
+    ? process.env.REACT_APP_MS_API_KEY
+    : "";
   const API_URL =
     "https://rangleio.cognitiveservices.azure.com/face/v1.0/detect";
   const API_PARAMS = {
