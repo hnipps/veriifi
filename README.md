@@ -1,4 +1,4 @@
-# Photo Check Demo
+# Verïfi
 
 [![Netlify Status](https://api.netlify.com/api/v1/badges/2efff95d-1256-47d9-9891-d91ffaa34ace/deploy-status)](https://app.netlify.com/sites/inspiring-mayer-9d0205/deploys)
 
