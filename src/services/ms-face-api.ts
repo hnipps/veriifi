@@ -53,15 +53,11 @@ export const request = (
  * @param {Object} response - A `{json, photoDimenions }` object, where `json` is an array of "faces" that the API found.
  * @returns {Object} An object containing flags/requirements about the face to validate.
  */
-export const transform = (response: {
-  json: any;
-  photoDimensions: { height: number; width: number };
-}) => {
-  const { json, photoDimensions } = response;
+export const transform = (response: { json: any }) => {
+  const { json } = response;
 
   // Detected face must be at least 50% as wide (and tall) as the photo
   // This threshold is not very robust at all!
-  const MIN_FACE_TO_PHOTO_RATIO = 0.5;
 
   // Initial return object
   let requirements = {
@@ -83,9 +79,7 @@ export const transform = (response: {
 
   // If exactly 1 face is detected, we can evaluate its attributes in detail
   if ((requirements.hasSingleFace = json.length === 1)) {
-    const { width: photoWidth, height: photoHeight } = photoDimensions;
     const {
-      faceRectangle: { width: faceWidth, height: faceHeight },
       faceAttributes: {
         blur: { blurLevel },
         noise: { noiseLevel },
@@ -110,9 +104,6 @@ export const transform = (response: {
       exposureLevel.toLowerCase() === "goodexposure" ||
       exposureLevel.toLowerCase() === "overexposure";
     requirements.isVisibleFace = visibleChecks.every(v => v === true);
-    requirements.isCorrectlyComposed =
-      faceWidth / photoWidth >= MIN_FACE_TO_PHOTO_RATIO &&
-      faceHeight / photoHeight >= MIN_FACE_TO_PHOTO_RATIO;
   }
 
   // Use results to compute a "score" between 0 and 1

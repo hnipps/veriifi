@@ -28,17 +28,21 @@ const UploadPhoto = () => {
   const [requirementFocusState, setRequirementFocusState] = useState(
     Requirement_State.UNCHECKED
   );
+  const [requirementVisibleState, setRequirementVisibleState] = useState(
+    Requirement_State.UNCHECKED
+  );
 
   const requirementsPhoto: Requirement[] = [
     {
       req: "One face in the photo",
       state: requirementFaceState
     },
-    { req: "In focus", state: requirementFocusState }
+    { req: "In focus", state: requirementFocusState },
+    { req: "Face is visible", state: requirementVisibleState }
   ];
 
   const updateRequirements = useMemo(
-    () => ({ hasSingleFace, isInFocus }: any) => {
+    () => ({ hasSingleFace, isInFocus, isVisibleFace }: any) => {
       setRequirementFaceState(
         hasSingleFace
           ? Requirement_State.SATISFIED
@@ -49,8 +53,17 @@ const UploadPhoto = () => {
           ? Requirement_State.SATISFIED
           : Requirement_State.NOT_SATISFIED
       );
+      setRequirementVisibleState(
+        isVisibleFace
+          ? Requirement_State.SATISFIED
+          : Requirement_State.NOT_SATISFIED
+      );
     },
-    [setRequirementFaceState, setRequirementFocusState]
+    [
+      setRequirementFaceState,
+      setRequirementFocusState,
+      setRequirementVisibleState
+    ]
   );
 
   const updateUploadedPhoto = useCallback(
@@ -58,9 +71,15 @@ const UploadPhoto = () => {
       const doesPhotoMeetRequirements = (result: {
         hasSingleFace: any;
         isInFocus: any;
+        isVisibleFace: any;
       }) =>
         Object.keys(result)
-          .filter(key => key === "hasSingleFace" || key === "isInFocus")
+          .filter(
+            key =>
+              key === "hasSingleFace" ||
+              key === "isInFocus" ||
+              key === "isVisibleFace"
+          )
           .reduce<any[]>(
             (acc, key) => [...acc, result[key as keyof typeof result]],
             []
